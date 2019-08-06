@@ -1,0 +1,82 @@
+page-inicio{
+
+  ::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+
+#p{
+  font-size: 14px;
+  line-height: 1.5;
+  color:  rgb(38, 39, 39);
+  margin-right: 2%;
+  margin-bottom:6%;
+  margin-left: 8%;
+
+  b {
+    color: map-get($colors, primary);
+  }
+}
+
+  .subirizquierda{
+    position:relative;
+    margin-top:-12%;
+    margin-left:-2%;
+    width:105%;
+  }
+
+  .izquierda{
+    position:relative;
+    margin-left:-2%;
+    width:105%;
+  }
+
+  .card-header1{
+    background-color: rgba(248, 56, 56, 0.966);
+    color: #fff;
+    font-size: 95%;
+    font-style: bold;
+    position:relative;
+  }
+
+  .card-header2{
+    background-color: rgb(138, 177, 138) ;
+    color: #fff;
+    font-size: 95%;
+    font-style: bold;
+    position:relative;
+  }
+
+
+  .card-header3{
+    background-color: rgb(240, 189, 95);
+    color: #fff;
+    font-size: 95%;
+    font-style: bold;
+    position:relative;
+  }
+
+  .card-header .item{
+  margin-left: 10%;
+  }
+  .card-content {
+    padding: 0px 16px;
+    max-height: 0px;
+  }
+}
+
+.img{
+  width:60% ;
+}
+
+.titulo{
+    background-color: #5da1f0;
+    color: white;
+  }
+
+.botones{
+    background-color: rgba(157, 201, 243, 0.973);
+    color: white;
+  }
+

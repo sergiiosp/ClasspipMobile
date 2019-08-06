@@ -1,0 +1,92 @@
+<!--
+  Generated template for the MispuntosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <form class="ClasspipCabecera">
+      <button ion-button menuToggle >
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <img src="../../assets/icon/Icono Classpip.png">
+      <h2 style="color:white">Classpip</h2>
+    </form>
+
+<ion-navbar color="azulcabecera">
+  <ion-title >MIS PUNTOS</ion-title>
+</ion-navbar>
+
+</ion-header>
+
+<ion-content class="fondoDegradado" >
+
+    <ion-content class="contenedorInformacion">
+        <div padding>
+            <ion-segment [(ngModel)]="Tipo">
+              <ion-segment-button value="Puntos" >
+                Puntos
+              </ion-segment-button>
+              <ion-segment-button value="Insignias">
+                Insignias
+              </ion-segment-button>
+            </ion-segment>
+        </div>
+
+        <div [ngSwitch]="Tipo">
+
+            <p id="p" *ngSwitchCase="'Puntos'">A continuación se muestran <b>los puntos</b> disponibles:</p>
+
+            <p id="p" *ngSwitchCase="'Insignias'">A continuación se muestran <b>las insignias</b> disponibles:</p>
+
+        </div>
+    </ion-content>
+
+
+
+  <div [ngSwitch]="Tipo">
+
+    <ion-list *ngSwitchCase="'Puntos'" >
+
+        <ion-list *ngIf="puntosProfesor;else Aviso_no_puntos" >
+
+            <accordionPuntos *ngFor="let punto of puntosProfesor" [title]="punto.Nombre">
+
+              <!-- Parráfo creado para que inicialmente aparezca un hueco en blanco al expandir el acordeón -->
+              <p>
+                <ion-item style="background-color:transparent"></ion-item>
+              </p>
+
+                <p class="p2">
+                  {{punto.Descripcion}}
+                </p>
+            </accordionPuntos>
+
+          </ion-list>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Insignias'">
+
+          <ion-list padding *ngIf="insigniasProfesor;else Aviso_no_puntos"  >
+
+              <ion-list padding style="background-color: white; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-top-left-radius: 20px;; box-shadow: 0px 3px 6px 0px rgb(34, 130, 226) " >
+                  <ion-item *ngFor="let insignia of insigniasProfesor; let i = index" >
+                    <ion-thumbnail item-start style="margin-left:-6%"  >
+                        <img *ngIf="imagenesLogo[i]" [src]="imagenesLogo[i]" >
+                        <img *ngIf="imagenesLogo[i] === undefined" src="../../assets//imgs/No-Photo-Available.jpg" >
+                    </ion-thumbnail>
+                    <h2 style="color: rgb(34, 130, 226) ; font-style: bold;">{{insignia.Nombre}}</h2>
+                    <p style="color:  rgb(61, 60, 60); font-style: oblique;" >{{insignia.Descripcion}}</p>
+                  </ion-item>
+              </ion-list>
+
+          </ion-list>
+
+    </ion-list>
+
+  </div>
+
+
+</ion-content>
