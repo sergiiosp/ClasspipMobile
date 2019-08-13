@@ -28,6 +28,8 @@ export class HomePage {
               public alertCtrl: AlertController) {
   }
 
+  //Función que activará el componente Loading y mostrará el mensaje que se haya introducido
+  //como input.
   async showLoading(message: string) {
 
     this.loading = await this.loadingCtrl.create({
@@ -37,9 +39,7 @@ export class HomePage {
   }
 
 
-
-
-
+  //Alerta que se generará al haber encontrado un error en la autentificación del usuario
   showAlert() {
     const alert = this.alertCtrl.create({
       title: 'Credenciales incorrectos',

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { Http, ResponseContentType} from '@angular/http';
 
-
+//Importamos las CLASES necesarias
 import {Coleccion} from '../../clases/Coleccion';
 import {Cromo} from '../../clases/Cromo';
 import {AlbumDelAlumno} from '../../clases/AlbumDelAlumno';
@@ -19,27 +19,29 @@ import {TablaAlumnoJuegoDeColeccion} from '../../clases/TablaAlumnoJuegoDeColecc
 })
 export class MisCromosActualesPage {
 
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   alumno: any;
   equipo: any;
   juego:any;
-  alumnosDelJuego: any[];
+  coleccion: Coleccion;
+
+  // PARAMETROS DE UN EQUIPO Y UN ALUMNO
   alumnoSeleccionado:any;
   equipoSeleccionado:any;
-
-  coleccion: Coleccion;
-  cromosColeccion: Cromo[];
-
-  imagenCromoArray: string[] = [];
   inscripcionesAlumnos: AlumnoJuegoDeColeccion[];
   inscripcionesEquipos: EquipoJuegoDeColeccion[];
   tablaAlumno: TablaAlumnoJuegoDeColeccion[] = [];
+  AlbumDelAlumno: AlbumDelAlumno[] = [];
 
+  //PARAMETROS DE UN CROMO
   cromo: Cromo;
   cromosAlumno: Cromo[];
   cromosEquipo: Cromo[];
+  cromosColeccion: Cromo[];
+  imagenCromoArray: string[] = [];
 
-  AlbumDelAlumno: AlbumDelAlumno[] = [];
 
+  // URLs que utilizaremos
   private APIUrl = 'http://localhost:3000/api/Colecciones';
   private APIURLEquipoJuegoDeColeccion = 'http://localhost:3000/api/EquiposJuegoDeColeccion';
   private APIURLAlumnoJuegoDeColeccion = 'http://localhost:3000/api/AlumnosJuegoDeColeccion';
@@ -52,20 +54,18 @@ export class MisCromosActualesPage {
     this.juego=navParams.get('juego');
   }
 
+  //Se realizarán las siguiente tareas dependiendo del modo de Juego Seleccionado.
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MisCromosActualesPage');
+    console.log('Bienvenido a la página de los cromos actuales');
     if (this.juego.Modo === 'Individual') {
     this.RecuperarInscripcionesAlumnoJuego();}
     else{
-      this.RecuperarInscripcionesEquiposJuego();
+    this.RecuperarInscripcionesEquiposJuego();
     }
-
   }
 
 
-
-
-  // Recupera las inscripciones de los alumnos en el juego y los puntos que tienen y los ordena de mayor a menor valor
+  // Recupera las inscripciones de los alumnos en el juego y los cromos que tienen
   RecuperarInscripcionesAlumnoJuego() {
     this.http.get<AlumnoJuegoDeColeccion[]>(this.APIURLAlumnoJuegoDeColeccion + '?filter[where][juegoDeColeccionId]='
     + this.juego.id)
@@ -74,6 +74,7 @@ export class MisCromosActualesPage {
       console.log(this.inscripcionesAlumnos);
 
       for (let i = 0; i < this.inscripcionesAlumnos.length ; i++) {
+        //alumno.id es el identificador del alumno seleccionado en la pantalla anterior
         if (this.inscripcionesAlumnos[i].alumnoId=== this.alumno.id){
           this.alumnoSeleccionado=this.inscripcionesAlumnos[i].id;
         }
@@ -85,8 +86,8 @@ export class MisCromosActualesPage {
     });
   }
 
-   // Recupera las inscripciones de los alumnos en el juego y los puntos que tienen y los ordena de mayor a menor valor
-   RecuperarInscripcionesEquiposJuego() {
+   // Recupera las inscripciones de los equipos en el juego y los cromos que tienen
+  RecuperarInscripcionesEquiposJuego() {
 
     this.http.get<EquipoJuegoDeColeccion[]>(this.APIURLEquipoJuegoDeColeccion + '?filter[where][juegoDeColeccionId]='
     + this.juego.id)
@@ -95,6 +96,7 @@ export class MisCromosActualesPage {
       console.log(this.inscripcionesEquipos);
 
       for (let i = 0; i < this.inscripcionesEquipos.length ; i++) {
+        //equipo.id es el identificador del equipo seleccionado en la pantalla anterior
         if (this.inscripcionesEquipos[i].equipoId=== this.equipo.id){
           this.equipoSeleccionado=this.inscripcionesEquipos[i].id;
         }
@@ -105,8 +107,7 @@ export class MisCromosActualesPage {
     });
   }
 
-
-
+  //Función que permite obtener desde la API los cromos disponibles del alumno seleccionado
   CromosDelAlumno(alumno:any) {
 
     this.http.get<Cromo[]>(this.APIURLAlumnoJuegoDeColeccion + '/' + alumno + '/cromos')
@@ -119,6 +120,7 @@ export class MisCromosActualesPage {
     });
   }
 
+  //Función que permite obtener desde la API los cromos disponibles del equipo seleccionado
   CromosDelEquipo(equipo:any) {
 
     this.http.get<Cromo[]>(this.APIURLEquipoJuegoDeColeccion + '/' + equipo + '/cromos')
@@ -157,7 +159,6 @@ export class MisCromosActualesPage {
   // Busca la imagen que tiene el nombre del cromo.Imagen y lo carga en imagenCromo
   GET_ImagenCromo(cromos: Cromo[]) {
 
-      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < cromos.length ; i++) {
 
         let cromo: Cromo;
@@ -183,9 +184,10 @@ export class MisCromosActualesPage {
       }
   }
 
+  //Función que te filtra por cromos que dispones y cromos que no dispones. Des esta manera
+  //se podrá visualizar un cromo mas transparente o sin transparencia.
   VerAlbum() {
 
-      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.cromosColeccion.length; i++) {
 
         if (this.juego.Modo === 'Individual') {
@@ -208,7 +210,7 @@ export class MisCromosActualesPage {
       }
   }
 
-  // Ordena los cromos por nombre. Asi es más fácil identificar los cromos que tengo
+  // Ordena los cromos por nombre.
   OrdenarCromos(cromosColeccion: any) {
       cromosColeccion.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
   }

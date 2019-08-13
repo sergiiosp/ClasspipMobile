@@ -56,7 +56,7 @@ id:number;
   }
 
   //Función correspondiente al ion-searchbar que nos permitirá visualizar los alumnos que
-  //tengas las caracteristicas definidas en el filtro
+  //tengan las caracteristicas definidas en el filtro
   getItems(ev: any) {
   // Reset items back to all of the items
   this.fijarAlumnos(this.itemsAPI);

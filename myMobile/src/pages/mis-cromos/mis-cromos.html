@@ -23,12 +23,17 @@
 <ion-content class="fondoDegradado" >
 
     <ion-content class="contenedorInformacion" style="margin-bottom: 0%;">
-        <p id="p1">A continuación se muestran <b>los cromos </b> de la colección seleccionada: </p>
+      <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
+        <p id="CromosInfo">A continuación se muestran <b>los cromos </b> de la colección seleccionada: </p>
     </ion-content>
 
+  <!--Se define una matriz de 12 posiciones por fila, donde cada cromo ocupa 5 posiciones por lo que
+  habrán dos cromos por fila y habrá un margen de 2 posiciones para separarlos-->
   <ion-grid >
     <ion-row style="margin-left: -1%">
         <ion-col col-5 *ngFor="let cromo of cromosColeccion;let i = index" style="margin-right:8%"   >
+            <!--Segun el nivel del cromo, se le asigna una clase u otra, para así conseguir
+            una estética distinta para cada cromo-->
             <ion-thumbnail  item-start class="cromo" style="margin-top: 5%;margin-left:5%; margin-right:10%"
               [ngClass]="{
               'Diamante' : cromo.Nivel === 'Diamante',

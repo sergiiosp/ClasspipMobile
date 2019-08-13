@@ -1,6 +1,6 @@
 page-mis-colecciones {
 
-
+//Se definen parámetros estéticos de los párrafos y sus correspondientes letras en negrita
   #p{
     font-size: 14px;
     line-height: 1.5;
@@ -14,7 +14,9 @@ page-mis-colecciones {
     }
   }
 
-  .imagenCromo {
+//Se define la posición de la imagen dentro del contenedor coleccion y los redondeos que presentan
+//dichas imagenes
+  .imagenColeccion {
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     max-width: 90px;
@@ -38,6 +40,7 @@ page-mis-colecciones {
     margin-bottom: 5%;
   }
 
+  //Se definen los parámetros del texto que indica el nombre de la coleccion
   #NombreColeccion{
     color:rgb(255, 253, 253);
     font-size: 13px;

@@ -3,28 +3,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { ResponseContentType, Http} from '@angular/http';
 
-
-/**
- * Generated class for the InfoJuegoPuntosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-info-juego-puntos',
   templateUrl: 'info-juego-puntos.html',
 })
+
 export class InfoJuegoPuntosPage {
 
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   juegoSeleccionado: any;
+  Tipo: string;
+
+  // PARAMETROS DEL JUEGO
   nivelesDelJuego: any[];
   puntosDelJuego: any[];
-  Tipo: string;
+
+  //PARAMETROS DEL NIVEL
   imagenNivel: string;
-  img: any;
   imagenesNivel: any[] = [];
+
+  // URLs que utilizaremos
   private APIRURLJuegoDePuntos = 'http://localhost:3000/api/JuegosDePuntos';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private http2: Http ) {
@@ -32,15 +31,15 @@ export class InfoJuegoPuntosPage {
     this.Tipo = "Puntos";
   }
 
+  //Al iniciar la pantalla, estas serán las acciones que se realizaran
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoJuegoPuntosPage');
-    console.log(this.juegoSeleccionado);
+    console.log('Bienvenido a la página de información del Juego de puntos');
     this.RecibirNivelesDelServicio();
     this.RecibirPuntosDelServicio();
-    console.log(this.puntosDelJuego);
 
   }
 
+  //Función que obtiene los niveles del juego de puntos seleccionado desde la API
   RecibirNivelesDelServicio(){
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/nivels').subscribe(
       lista => {
@@ -51,6 +50,7 @@ export class InfoJuegoPuntosPage {
         ;})
   }
 
+  //Función que obtiene los puntos del juego de puntos seleccionado desde la API
   RecibirPuntosDelServicio(){
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/puntos').subscribe(
       lista => {

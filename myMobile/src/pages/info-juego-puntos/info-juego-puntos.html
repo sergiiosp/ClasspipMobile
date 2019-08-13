@@ -23,8 +23,11 @@
 
 <ion-content class="fondoDegradado">
 
-    <!--Se define las opciones posibles mediante un ion-segment-->
+    <!--Se define un seleccionador de opciones , puedes escoger entre Puntos o
+    Niveles, de esa manera se asigna un value para mostrar posteriormente un contenido u
+    otro--><!--Se define las opciones posibles mediante un ion-segment-->
     <ion-content class="contenedorInformacion">
+
         <div padding>
             <ion-segment [(ngModel)]="Tipo">
               <ion-segment-button value="Puntos" >
@@ -36,8 +39,10 @@
             </ion-segment>
         </div>
 
+        <!--Segun el tipo de Asignación que se haya seleccionado, se mostrará un párrafo u otro-->
         <div [ngSwitch]="Tipo">
 
+            <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
             <p class="InformacionPantalla" *ngSwitchCase="'Puntos'">A continuación se muestran <b>los puntos</b> disponibles:</p>
 
             <p class="InformacionPantalla" *ngSwitchCase="'Niveles'">A continuación se muestran <b>los niveles</b> disponibles:</p>
@@ -74,6 +79,8 @@
 
         <ion-list *ngSwitchCase="'Niveles'">
 
+              <!--Si nivelesDelJuego tiene algun valor, entonces me debe enseñar la lista
+              sino, deberá saltar el Aviso_no_niveles-->
               <ion-list padding *ngIf="nivelesDelJuego;else Aviso_no_niveles"  >
 
                 <!--Se definen los niveles que se van a mostrar en distintos items-->

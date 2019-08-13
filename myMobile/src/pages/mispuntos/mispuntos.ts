@@ -4,13 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseContentType, Http} from '@angular/http';
 
 
-/**
- * Generated class for the MispuntosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-mispuntos',
@@ -18,14 +11,19 @@ import { ResponseContentType, Http} from '@angular/http';
 })
 export class MispuntosPage {
 
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   id:number;
-  puntosProfesor: any[];
-  insigniasProfesor: any[];
-  imagenLogo: string;
-  img: any;
-  imagenesLogo: any[] = [];
   Tipo: string;
 
+  //VARIABLES DE LA PÁGINA (PUNTOS o INSIGNIAS)
+  puntosProfesor: any[];
+  insigniasProfesor: any[];
+
+  //PARAMETROS DE LAS INSIGNIAS
+  imagenLogo: string;
+  imagenesLogo: any[] = [];
+
+  // URLs que utilizaremos
   private APIUrlProfesor = 'http://localhost:3000/api/Profesores';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http: HttpClient, private http2: Http ) {
@@ -33,19 +31,17 @@ export class MispuntosPage {
     this.Tipo = "Puntos";
   }
 
+  //Al iniciar la pantalla, estas serán las acciones que se realizaran
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MispuntosPage');
-    console.log('El id es ' + this.id);
+    console.log('Bienvenido a la página de Puntos e Insignias Existentes');
+    console.log('El id del profesor es ' + this.id);
 
     this.PuntosDelProfesor();
     this.InsigniasDelProfesor();
-
-    console.log(this.imagenesLogo);
-
   }
 
 
-
+  //Función que obtiene los puntos creados por el profesor desde la API
   PuntosDelProfesor() {
 
     this.http.get<any[]>(this.APIUrlProfesor + '/' + this.id + '/puntos')
@@ -61,9 +57,10 @@ export class MispuntosPage {
     });
   }
 
-    ////////////////////////////////////////////// PARA INSIGNIAS ////////////////////////////////////////////////
-    InsigniasDelProfesor() {
+  //Función que obtiene las insignias creadas por el profesor desde la API
+  InsigniasDelProfesor() {
 
+      //Se inicializa el vector imagenesLogo a [] para limpiar las imagenes anteriores
       this.imagenesLogo=[];
       this.http.get<any[]>(this.APIUrlProfesor + '/' + this.id + '/insignia')
       .subscribe(insignas => {
@@ -79,10 +76,10 @@ export class MispuntosPage {
         }
 
       });
-    }
+  }
 
-    // Le pasamos el id de la insignia y buscamos el logo que tiene
-    LogoDeInsignias(insignias: any[]) {
+  // Le pasamos el id de la insignia y buscamos el logo que tiene
+  LogoDeInsignias(insignias: any[]) {
 
       for (let i = 0; i < insignias.length; i ++) {
       if (insignias[i].Imagen!== undefined) {

@@ -23,20 +23,23 @@
 <ion-content class="fondoDegradado">
 
   <ion-content class="contenedorInformacion">
+    <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
     <p id="p">Seleccione <b>la colección de cromos </b> que desea visualizar: </p>
   </ion-content>
 
 
       <!--Definimos una matriz de 2 columnas por fila ya que cada fila contiene 12 posiciones y
-      se ha definido que cada equipo 5 posiciones, por lo que habrán 2 equipos por fila. Se define
+      se ha definido que cada equipo tienes 5 posiciones, por lo que habrán 2 equipos por fila. Se define
       5 posiciones y no 6 y 6 para dejar margenes laterales entre ellos-->
 
+      <!--Si coleccionesProfesor tiene algun valor, entonces me debe enseñar la matriz
+      sino, deberá saltar el Aviso_no_colecciones-->
       <div *ngIf="coleccionesProfesor;else Aviso_no_colecciones" >
         <ion-grid >
           <ion-row style="margin-left: 9%" >
               <ion-col col-5 id="contenedorEquipo" *ngFor="let coleccion of coleccionesProfesor;let i = index"  >
                   <ion-thumbnail item-start style="margin-top: 5%; margin-left:5%; margin-right:5%" (click)="irCromos(coleccion);" >
-                      <img class ="imagenCromo" *ngIf="imagenesColeccion" [src]="imagenesColeccion[i]" >
+                      <img class ="imagenColeccion" *ngIf="imagenesColeccion" [src]="imagenesColeccion[i]" >
                       <h2 id="NombreColeccion">{{coleccion.Nombre}}</h2>
                   </ion-thumbnail>
               </ion-col>

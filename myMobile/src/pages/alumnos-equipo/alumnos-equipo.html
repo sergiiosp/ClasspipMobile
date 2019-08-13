@@ -23,7 +23,7 @@
 <ion-content class="fondoDegradado" >
 
       <ion-content class="contenedorInformacion">
-          <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
+      <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
           <p class="InformacionPantalla"> A continuación se muestran <b>los alumnos</b> del equipo:</p>
       </ion-content>
 
@@ -41,9 +41,13 @@
               <!--Los alumnos es lo que hemos definidos como item, ya que sino no podriamos
               hacer uso de la funcion filtrar.-->
                 <ion-item *ngFor="let item of items" no-lines>
+
+                  <!--Se define una imagen predefinida para cada alumno, deberá modificarse y permitir
+                  que esa foto se seleccione desde la API-->
                     <ion-avatar item-start>
                       <img src="../../assets/icon/icon-student.svg">
                     </ion-avatar>
+
                     <p class="InformacionAlumno">{{item.Nombre}} {{item.PrimerApellido}} {{item.SegundoApellido}}</p>
                 </ion-item>
             </ion-list>

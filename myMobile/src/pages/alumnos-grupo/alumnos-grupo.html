@@ -27,17 +27,23 @@
         <p id="InformacionPantalla"> A continuación se muestran <b>los alumnos</b> del grupo:</p>
     </ion-content>
 
-    <!--Mediante el ion-searchbar permitimos filtrar los alumnos y buscar el deseado-->
+    <!--Mediante el ion-searchbar permitimos filtrar los alumnos(Items) y buscar el deseado-->
     <ion-searchbar  (ionInput)="getItems($event)" placeholder="Filtrar por alumno" style="background-color: transparent; margin-top: -5%; "></ion-searchbar>
+
     <ion-content class="ContenidoAlumnos" padding>
             <ion-list >
                 <!--Los alumnos es lo que hemos definidos como item, ya que sino no podriamos
                 hacer uso de la funcion filtrar.-->
                 <ion-item no-lines no-padding *ngFor="let item of items">
+
+                  <!--Se define una imagen predefinida para cada alumno, deberá modificarse y permitir
+                  que esa foto se seleccione desde la API-->
                     <ion-avatar item-start style="margin-left:5%;" >
                         <img src="../../assets/icon/icon-student.svg">
                     </ion-avatar>
+
                     <p id="InformacionAlumno"> {{item.Nombre}} {{item.PrimerApellido}} {{item.SegundoApellido}}</p>
+
                 </ion-item>
             </ion-list>
     </ion-content>

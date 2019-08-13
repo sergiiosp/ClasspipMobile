@@ -6,7 +6,7 @@ page-alumnos-equipo {
 //Definimos id=" # " y no clases=" . " ya que con las clases podemos aplicar esos parámetros
 //a distintos elementos pero con un id, solo lo podemos aplicar a un unico elemento.
 
-//Para esta pantalla se utilizará unicamente una vez el elemento por lo que le corresponde un
+//Para esta pantalla se utilizará una única vez el elemento, por lo que le corresponde un
 //identificador.
 
   #logoEquipo {
@@ -57,6 +57,10 @@ page-alumnos-equipo {
   }
 }
 
+
+                   //*************Información sobre alumnos*************//
+
+//Se define los parametros esteticos del pequeño texto informativo de los alumnos.
 .InformacionAlumno {
   color: black;
   font-size: 14px;

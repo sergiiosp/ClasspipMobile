@@ -1,5 +1,10 @@
 page-asignar-puntos {
 
+                   //*************Paneles con comentarios sobre pantallas*************//
+
+//Se define los parametros esteticos del pequeño texto explicativo de la pantalla y además se
+//define los valores "b" que son los parametros para texto en negrita.
+
   .InformacionPantalla{
     font-size: 12px;
     line-height: 1.5;
@@ -13,6 +18,9 @@ page-asignar-puntos {
       color: map-get($colors, primary);
     }
   }
+
+//Se define las características de la cabecera de la pantalla Asignar-Cromos además de
+//definir el aspecto estético de los elementos
 
   .cabecera{
     background-color:map-get($colors, azulcabecera);
@@ -30,7 +38,9 @@ page-asignar-puntos {
     }
   }
 
-  .Informacion{
+//Se define las características del botón de Validación, desde el color de fondo hasta el tamaño
+//de la letra que aparecerá en dicho botón.
+  .Validacion{
     background-color: map-get($colors, azulcabecera);
     color: white;
     font-size: 90%;
@@ -44,6 +54,9 @@ page-asignar-puntos {
     border-bottom-right-radius: 10px;
     box-shadow: 0px 3px 6px 0px map-get($colors, primary);
   }
+
+//Se define las características del fondo de la tabla que recoge la información tanto de alumnos
+//como de equipos
 
   #fondo {
     background:white;

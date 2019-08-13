@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+
+//Importamos las páginas necesarias
 import { JuegoSeleccionadoPage } from '../juego-seleccionado/juego-seleccionado';
 
 export interface OpcionSeleccionada {
@@ -16,11 +18,11 @@ export interface OpcionSeleccionada {
 })
 export class JuegoPuntosPage {
 
+  // URLs que utilizaremos
   private APIUrlGrupos = 'http://localhost:3000/api/Grupos';
 
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   grupoId: number;
-  alumnosGrupo: any[];
-  equiposGrupo: any[];
 
 // Opciones para mostrar en la lista desplegable para seleccionar el tipo de juego que listar
 opcionesMostrar: OpcionSeleccionada[] = [
@@ -59,7 +61,6 @@ opcionesMostrar: OpcionSeleccionada[] = [
   ListaJuegosSeleccionadoActivo: any[];
   ListaJuegosSeleccionadoInactivo: any[];
 
-  // tslint:disable-next-line:no-inferrable-types
   opcionSeleccionada: string = 'todosLosJuegos';
   juegoSeleccionado: any;
 
@@ -67,18 +68,14 @@ opcionesMostrar: OpcionSeleccionada[] = [
     this.grupoId=navParams.get('id');
   }
 
+  //Se realizarán las siguiente tareas al inicializar la página.
   ionViewDidLoad() {
-    console.log('ionViewDidLoad JuegoPuntosPage');
-  }
-
-  ngOnInit() {
-    this.EquiposDelGrupo();
+    console.log('Bienvenido a la página de Juegos');
 
     // Recupera la lista de juegos que tiene el grupo (primero el de puntos, después de colección y después los totales)
     // y los va clasificando en activo e inactivo
     this.ListaJuegosDePuntos();
   }
-
 
   //////////////////////////////////////// FUNCIONES PARA LISTAR JUEGOS ///////////////////////////////////////////////
 
@@ -89,7 +86,6 @@ opcionesMostrar: OpcionSeleccionada[] = [
     .subscribe(juegos => {
       console.log('He recibido los juegos de puntos');
 
-      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < juegos.length; i++) {
         if (juegos[i].JuegoActivo === true) {
           this.juegosDePuntosActivos.push(juegos[i]);
@@ -108,7 +104,6 @@ opcionesMostrar: OpcionSeleccionada[] = [
     .subscribe(juegos => {
       console.log('He recibido los juegos de coleccion');
 
-      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < juegos.length; i++) {
         if (juegos[i].JuegoActivo === true) {
           this.juegosDeColeccionActivos.push(juegos[i]);
@@ -206,26 +201,6 @@ opcionesMostrar: OpcionSeleccionada[] = [
   // Función que usaremos para clicar en un juego y entrar en él, enviándolo al servicio
   JuegoSeleccionado(juego: any) {
     this.navCtrl.push (JuegoSeleccionadoPage,{juego:juego});
-  }
-
-  prueba() {
-    console.log(this.equiposGrupo);
-    console.log(this.equiposGrupo[0]);
-    console.log(this.grupoId);
-  }
-
-   // RECUPERA LOS EQUIPOS DEL GRUPO
-   EquiposDelGrupo() {
-    this.http.get<any[]>(this.APIUrlGrupos + '/' + this.grupoId + '/equipos')
-    .subscribe(equipos => {
-      if (equipos !== undefined) {
-        console.log('Hay equipos');
-        this.equiposGrupo = equipos;
-        console.log(this.equiposGrupo);
-      } else {
-        console.log('Este grupo aun no tiene equipos');
-      }
-    });
   }
 
 

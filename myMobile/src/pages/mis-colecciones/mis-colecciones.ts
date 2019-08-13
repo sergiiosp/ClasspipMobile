@@ -3,10 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, ResponseContentType} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
 
-
-
+//Importamos las clases necesarias
 import {Coleccion} from '../../clases/Coleccion';
 
+//Importamos las páginas necesarias
 import { MisCromosPage } from '../mis-cromos/mis-cromos';
 
 @IonicPage()
@@ -16,13 +16,16 @@ import { MisCromosPage } from '../mis-cromos/mis-cromos';
 })
 export class MisColeccionesPage {
 
-  numeroDeCromos: number;
 
+// PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   profesorId:number;
+
+//Parametros de coleccion de cromos
   coleccionesProfesor: Coleccion[];
   imagenColeccion: string;
   imagenesColeccion: any[] = [];
 
+  // URLs que utilizaremos
   private APIUrlProfesor = 'http://localhost:3000/api/Profesores';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -30,13 +33,13 @@ export class MisColeccionesPage {
     this.profesorId=navParams.get('id');
   }
 
+  //Se realizarán las siguiente tareas al inicializar la página.
   ionViewDidLoad() {
     console.log('Bienvenido a la página correspondiente a las colecciones del profesor');
-
     this.ColeccionesDelProfesor();
-
   }
 
+  //Función que obtiene las colecciones existentes del profesor desde la API
   ColeccionesDelProfesor() {
 
     this.https.get<Coleccion[]>(this.APIUrlProfesor + '/' + this.profesorId + '/coleccions')
@@ -89,11 +92,12 @@ export class MisColeccionesPage {
   }
 
   }
-}
+  }
 
-irCromos(i) {
+  //Función que te redirije a la página de los cromos que contiene la colección seleccionada
+  irCromos(i) {
   console.log ('Accediendo a pagina Juegos');
   this.navCtrl.push (MisCromosPage,{coleccion:i});
-}
+  }
 
 }

@@ -1,5 +1,7 @@
 page-asignar-cromos {
 
+//Se define las características de la cabecera de la pantalla Asignar-Cromos además de
+//definir el aspecto estético de los elementos
 
   .cabecera{
     background-color:map-get($colors, azulcabecera);
@@ -17,6 +19,9 @@ page-asignar-cromos {
     }
   }
 
+//Se define las características del fondo de la tabla que recoge la información tanto de alumnos
+//como de equipos
+
   #fondo {
     background:white;
     height: 130px;
@@ -24,6 +29,12 @@ page-asignar-cromos {
     border-bottom-right-radius: 20px;
     box-shadow: 0px 3px 6px 0px map-get($colors, primary);
   }
+
+
+                 //*************Paneles con comentarios sobre pantallas*************//
+
+//Se define los parametros esteticos del pequeño texto explicativo de la pantalla y además se
+//define los valores "b" que son los parametros para texto en negrita.
 
   .InformacionPantalla{
     font-size: 11px;
@@ -39,7 +50,10 @@ page-asignar-cromos {
 
   }
 
-  .Informacion{
+
+//Se define los parametros esteticos del botón de validar asignación de cromos.
+
+  .Validacion{
     background-color: map-get($colors, azulcabecera);
     color: white;
     font-size: 90%;
@@ -54,6 +68,10 @@ page-asignar-cromos {
     box-shadow: 0px 3px 6px 0px map-get($colors, primary);
   }
 
+
+                //*************Estética referente a CROMOS*************//
+
+//Se define el tamaño de la carta del cromo y los bordes que va a tener.
   .cromo {
     max-width: 100px;
     max-height: 105px;
@@ -66,6 +84,7 @@ page-asignar-cromos {
     border-bottom-right-radius: 20px;
   }
 
+//Se define el tamaño de la imagen del cromo aleatorio.
   .cromoAleatorio {
     max-width: 100px;
     max-height: 115px;
@@ -74,6 +93,25 @@ page-asignar-cromos {
     margin-top:-25%;
   }
 
+//Se define el color, el tamaño y el peso de la fuente que se utilizará para el Nombre
+//del Cromo.
+  #NombreCromo{
+    color:rgb(255, 255, 255);
+    font-size: 10px;
+    margin-left:2px;
+    text-transform: uppercase;
+  }
+
+//Se define el color, el tamaño y la alineación de la fuente que se utilizará para el Nivel
+//del Cromo.
+  #NivelCromo{
+    color:rgb(255, 253, 253);
+    font-size: 10px;
+    text-align: center;
+    margin-top:-8%;
+  }
+
+//Se define el tamaño, los bordes y el margen a otros elementos de la imagen del Cromo.
   .imagenCromo {
     max-width: 85px;
     max-height: 50px;
@@ -87,11 +125,10 @@ page-asignar-cromos {
     margin-top:1%;
   }
 
-  .Aleatorio{
-    background-color: rgb(241, 187, 116);
-    box-shadow: 0px 3px 6px 0px rgb(219, 173, 112);
-  }
 
+        //*************Estética referente a CROMOS segun el nivel del Cromo*************//
+
+//*************Estética referente a nivel DIAMANTE*************//
   .Diamante {
     background-color: rgb(62, 177, 163);
     box-shadow: 0px 3px 6px 0px rgb(50, 150, 138);
@@ -106,7 +143,7 @@ page-asignar-cromos {
   }
 
 
-
+//*************Estética referente a nivel PLATINO*************//
   .Platino {
     background-color: rgb(222, 60, 151);
     box-shadow: 0px 3px 6px 0px rgb(187, 50, 128);
@@ -121,7 +158,7 @@ page-asignar-cromos {
   }
 
 
-
+//*************Estética referente a nivel ORO*************//
   .Oro {
     background-color: rgb(222, 193, 89);
     box-shadow: 0px 3px 6px 0px rgb(206, 179, 81);
@@ -136,7 +173,7 @@ page-asignar-cromos {
   }
 
 
-
+//*************Estética referente a nivel PLATA*************//
   .Plata {
     background-color: rgb(143, 157, 160);
     box-shadow: 0px 3px 6px 0px rgb(126, 138, 141);
@@ -151,7 +188,7 @@ page-asignar-cromos {
   }
 
 
-
+//*************Estética referente a nivel BRONCE*************//
   .Bronce {
     background-color: rgb(180, 135, 75);
     box-shadow: 0px 3px 6px 0px rgb(133, 103, 64);
@@ -165,17 +202,5 @@ page-asignar-cromos {
     width:85px;
   }
 
-  #NombreCromo{
-    color:rgb(255, 255, 255);
-    font-size: 10px;
-    margin-left:2px;
-    text-transform: uppercase;
-  }
 
-  #NivelCromo{
-    color:rgb(255, 253, 253);
-    font-size: 10px;
-    text-align: center;
-    margin-top:-8%;
-  }
 }

@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+
+//Importamos las páginas necesarias
 import { AlumnosGrupoPage } from '../alumnos-grupo/alumnos-grupo';
 import { EquiposGrupoPage } from '../equipos-grupo/equipos-grupo';
 import { JuegoPuntosPage } from '../juego-puntos/juego-puntos';
-
-
-/**
- * Generated class for the InicioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,24 +14,26 @@ import { JuegoPuntosPage } from '../juego-puntos/juego-puntos';
 })
 export class InicioPage {
 
-
+// URLs que utilizaremos
 private APIUrlProfesor = 'http://localhost:3000/api/Profesores';
 
-lista : any[];
+// PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
 id:number;
-information : any[];
+
+//Parametros de un Usuario
+lista : any[];
 data: any;
 nombre: string;
-idProfesor:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
   this.id=navParams.get('id');
 
   }
 
+  //Se realizarán las siguiente tareas al inicializar la página.
   ionViewDidLoad() {
-    console.log('El id es ' + this.id);
-    console.log('ionViewDidLoad InicioPage');
+    console.log('El identificador del profesor es ' + this.id);
+    //Se accede a la API y se obtiene la lista de grupos del profesor
     this.http.get<any[]>(this.APIUrlProfesor + '/' + this.id + '/grupos').subscribe(
       lista => {
         this.lista = lista;
@@ -48,12 +44,14 @@ idProfesor:number;
   }
 
 
+  //Función que te redirije a la página de los alumnos del grupo seleccionado del profesor
   irAlumnos(i) {
       console.log ('El id del grupo es ' + i);
       console.log ('Accediendo a pagina Alumnos');
       this.navCtrl.push (AlumnosGrupoPage,{id:i});
   }
 
+  //Función que te redirije a la página de los equipos del grupo seleccionado del profesor
   irEquipos(i,j) {
       console.log ('El id del grupo es ' + i);
       console.log ('El nombre del grupo es ' + j);
@@ -61,20 +59,10 @@ idProfesor:number;
       this.navCtrl.push (EquiposGrupoPage,{id:i,nombre:j});
     }
 
+  //Función que te redirije a la página de los equipos del grupo seleccionado del profesor
   irJuego(i) {
       console.log ('Accediendo a pagina Juegos');
       this.navCtrl.push (JuegoPuntosPage,{id:i});
   }
-
-  toggleDetails(data) {
-    if (data.showDetails) {
-      data.showDetails = false;
-      data.icon = 'ios-add-circle-outline';
-    } else {
-      data.showDetails = true;
-      data.icon = 'ios-remove-circle-outline';
-    }}
-
-
 
 }

@@ -22,19 +22,35 @@
 
 <ion-content class="fondoDegradado">
 
+  <!--SE DEFINE EL CONTENIDO INFORMATIVO DE LA PARTE SUPERIOR DE LA PANTALLA-->
+
   <ion-content class="contenedorInformacion" style="height: 30%;">
+
     <!--Al poner <b> permitimos que las palabras que esten dentro se visualicen en negrita-->
     <p class="InformacionPantalla"> Seleccione el <b>tipo de punto</b> a asignar:</p>
+
+        <!--Se define un desplegable que muestra los puntos disponibles recibidos
+        desde puntosDelJuego-->
         <select style="font-size: 80%; margin-left: 8%;" [(ngModel)]="puntoSeleccionadoId" name="punto" >
-            <option *ngFor="let punto of listaSeleccionable" [value]="punto.id"  >
+            <option *ngFor="let punto of puntosDelJuego" [value]="punto.id"  >
                 {{punto.Nombre}}
             </option>
         </select>
+
     <p class="InformacionPantalla"> Seleccione la <b>cantidad de puntos</b> a asignar:</p>
+
+    <!--Se define un input donde por defecto aparece el valor 1 y donde el usuario deberá
+    escoger la cantidad de puntos a asignar-->
     <input style="font-size: 80%; margin-left: 8%;" (keyup)="Disabled()" type="number" name="valorPunto" placeholder="Cantidad de puntos" requiered [(ngModel)]="valorPunto">
   </ion-content>
 
+          <!--SE REALIZA UNA DISTINCIÓN ENTRE UN JUEGO INDIVIDUAL O COLECTIVO-->
+  <!--De esta manera se consigue bien mostrar los alumnos si se trata de un juego individual
+  o de equipos si se trata de un juego colectivo-->
+
   <div *ngIf="rankingJuegoDePuntos[0]" padding >
+
+    <!--Se define la cabecera de la tabla que recoge los alumnos del juego-->
     <ion-grid no-padding  >
       <ion-row class="cabecera" >
         <ion-col col-2 style="margin-top:5%">
@@ -48,6 +64,7 @@
         </ion-col>
       </ion-row>
 
+      <!--Se define el contenido de la tabla que recoge los alumnos del juego-->
       <ion-content id="fondo">
         <div style="margin-top: -6%">
             <ion-row class="casillas" *ngFor="let alumno of rankingJuegoDePuntos"  >
@@ -68,6 +85,8 @@
   </div>
 
   <div *ngIf="rankingEquiposJuegoDePuntos[0]" padding >
+
+      <!--Se define la cabecera de la tabla que recoge los equipos del juego-->
       <ion-grid no-padding  >
         <ion-row class="cabecera" >
           <ion-col col-2 style="margin-top:5%">
@@ -78,6 +97,7 @@
           </ion-col>
         </ion-row>
 
+        <!--Se define el contenido de la tabla que recoge los equipos del juego-->
         <ion-content id="fondo">
           <div style="margin-top: -6%">
               <ion-row  *ngFor="let equipo of rankingEquiposJuegoDePuntos"  >
@@ -95,7 +115,8 @@
   </div>
 
 
-  <ion-item class="Informacion" (click)="showConfirm();"> Validar
+  <!--Se define el botón de verificación para aceptar la asignación de puntos-->
+  <ion-item class="Validacion" (click)="showConfirm();"> Validar
     <ion-icon style="color: white; margin-right: 14%;" name="checkbox" item-left ></ion-icon>
   </ion-item>
 

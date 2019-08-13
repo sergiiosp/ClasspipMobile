@@ -1,6 +1,7 @@
 page-mispuntos {
 
-  #p{
+  //Se definen parámetros estéticos de la clase ParrafoTipo y sus correspondiente letras en negrita
+  #ParrafoTipo{
     font-size: 4.5vw;
     line-height: 1.5;
     color:  rgb(38, 39, 39);
@@ -14,6 +15,8 @@ page-mispuntos {
     }
   }
 
+  //Se definen parámetros estéticos de los párrafos
+
   p{
     font-size:4.5vw;
     margin-left:6%;
@@ -23,6 +26,10 @@ page-mispuntos {
     color:map-get($colors, light) ;
   }
 
+                 //*************CLASSPIP CABECERA*************//
+
+//Se define los parámetros de la Cabecera de la Aplicación
+
   .cabecera{
     background-color: map-get($colors, primary);
     border-top-left-radius: 20px;
@@ -31,13 +38,8 @@ page-mispuntos {
     margin-right:2%;
   }
 
-  .contenido{
-    background-color: map-get($colors, azulcabecera);
-    margin-left:2%;
-    margin-right:2%;
-  }
-
-  .p2{
+  //Se define los parámetros estéticos de el texto que describe el punto seleccionado
+  .DescripcionPunto{
     margin-left:5%;
     margin-right:5%;
     text-align: justify;
@@ -47,6 +49,7 @@ page-mispuntos {
 
   }
 
+  //Se define el redondeo de las imagenes utilizadas (Border)
   img{
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -54,6 +57,7 @@ page-mispuntos {
     border-bottom-right-radius: 30px;
   }
 
+  //Se definen los parámetros del contenedor que muestra la información de la pantalla actual
   .contenedorInformacion{
     height: 27%;
     box-shadow: 0px 3px 6px 0px map-get($colors, primary);

@@ -1,5 +1,7 @@
 page-juego-seleccionado {
 
+//Se define las características del fondo de la tabla que recoge la información tanto de alumnos
+//como de equipos
     #fondo {
       background:white;
       height: 170px;
@@ -8,6 +10,7 @@ page-juego-seleccionado {
       box-shadow: 0px 3px 6px 0px map-get($colors, primary);
     }
 
+//Se definen parámetros estéticos de la clase p y de las letras en negrita
     #p{
       font-size: 14px;
       line-height: 1.5;
@@ -22,6 +25,8 @@ page-juego-seleccionado {
       }
     }
 
+//Se define las características de la cabecera de la pantalla Juego-seleccionado además de
+//definir el aspecto estético de los párrafos
   .cabecera{
     background-color:map-get($colors, primary);
     margin-top:-8%;
@@ -38,6 +43,7 @@ page-juego-seleccionado {
     }
   }
 
+  //Se define los valores estéticos del contenido de la tabla
   .casillas{
     background-color:transparent;
     p {
@@ -52,14 +58,12 @@ page-juego-seleccionado {
 
   }
 
-  .tamaño{
-    max-height: 200px;
-  }
-
+  //Se define el peso de la letra en negrita
   b {
     font-weight: 500;
   }
 
+  //Se definen parámetros estéticos de los párrafos y de las letras en negrita
   p {
     font-size: 14px;
     line-height: 1.5;
@@ -71,14 +75,15 @@ page-juego-seleccionado {
 
   }
 
-  #p1{
+  //Se define la altura de la linea de los Nombres de los equipos
+  #NombreEquipos{
     line-height: 1.5;
     margin-top:5%
   }
 
 
 
-
+  //Se definen los valores estéticos del botón Información
   .Informacion{
     background-color: rgba(248, 56, 56, 0.966);
     color: white;
@@ -94,6 +99,7 @@ page-juego-seleccionado {
     box-shadow: 0px 3px 6px 0px rgba(223, 44, 44, 0.966);
   }
 
+  //Se definen los valores estéticos del botón Asignar cromos/puntos
   .Asignar{
     background-color: rgb(138, 177, 138) ;
     color: white;

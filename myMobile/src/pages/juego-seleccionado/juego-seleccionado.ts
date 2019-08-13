@@ -1,12 +1,15 @@
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { Component } from '@angular/core';
+
+//Importamos las páginas necesarias
 import { InfoJuegoPuntosPage } from '../info-juego-puntos/info-juego-puntos';
 import { AsignarPuntosPage } from '../asignar-puntos/asignar-puntos';
 import { AsignarCromosPage } from '../asignar-cromos/asignar-cromos';
 import { MisCromosPage } from '../mis-cromos/mis-cromos';
 import { MisCromosActualesPage } from '../mis-cromos-actuales/mis-cromos-actuales';
 
+//Importamos las clases necesarias
 import {TablaAlumnoJuegoDePuntos} from '../../clases/TablaAlumnoJuegoDePuntos';
 import {TablaEquipoJuegoDePuntos} from '../../clases/TablaEquipoJuegoDePuntos';
 import {Punto} from '../../clases/Punto';
@@ -22,7 +25,7 @@ import {Coleccion} from '../../clases/Coleccion';
 })
 export class JuegoSeleccionadoPage  {
 
-  // Juego De Puntos seleccionado
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   juegoSeleccionado: any;
 
   // Recupera la informacion del juego seleccionado además de los alumnos o los equipos, los puntos y los niveles del juego
@@ -30,36 +33,24 @@ export class JuegoSeleccionadoPage  {
   equiposDelJuego: any[];
   puntosDelJuego: any[];
   nivelesDelJuego: any[];
-
+  alumnosEquipo: any[];
+  puntoSeleccionadoId: number;
+  items: any[];
+  items1: any[];
+  itemsAPI: any[];
+  coleccion: any;
   listaSeleccionable: any[] = [];
 
   // Recoge la inscripción de un alumno en el juego ordenada por puntos
   listaAlumnosOrdenadaPorPuntos: any[];
-
   listaEquiposOrdenadaPorPuntos: any[];
 
    // Muestra la posición del alumno, el nombre y los apellidos del alumno, los puntos y el nivel
    rankingJuegoDePuntos: any[] = [];
    rankingJuegoDePuntosTotal: any[] = [];
-
    rankingEquiposJuegoDePuntos: any[] = [];
    rankingEquiposJuegoDePuntosTotal: any[] = [];
 
-   puntoSeleccionadoId: number;
-
-   displayedColumnsAlumnos: string[] = ['posicion', 'nombreAlumno', 'primerApellido', 'segundoApellido', 'puntos', 'nivel', ' '];
-
-   displayedColumnsEquipos: string[] = ['posicion', 'nombreEquipo', 'miembros', 'puntos', 'nivel', ' '];
-
-   alumnosEquipo: any[];
-
-   tab1: any;
-   tab2: any;
-
-   items: any[];
-   items1: any[];
-   itemsAPI: any[];
-   coleccion: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private http: HttpClient) {
@@ -67,7 +58,7 @@ export class JuegoSeleccionadoPage  {
 
   }
 
-  private APIUrl = 'http://localhost:3000/api/Equipos';
+  // URLs que utilizaremos
   private APIRURLJuegoDePuntos = 'http://localhost:3000/api/JuegosDePuntos';
   private APIURLAlumnoJuegoDePuntos = 'http://localhost:3000/api/AlumnoJuegosDePuntos';
   private APIURLEquiposJuegoDePuntos = 'http://localhost:3000/api/EquiposJuegosDePuntos';
@@ -76,38 +67,38 @@ export class JuegoSeleccionadoPage  {
   private APIRURLJuegoDeColeccion = 'http://localhost:3000/api/JuegosDeColeccion';
   private APIRURLColecciones = 'http://localhost:3000/api/Colecciones';
 
+  //Se realizarán las siguiente tareas al inicializar la página.
   ionViewDidLoad() {
     console.log(this.juegoSeleccionado);
-  }
 
-  ngOnInit() {
+    //Se discrimina por tipo de Juego: Puntos o Coleccion
 
     if (this.juegoSeleccionado.Tipo === 'Juego De Puntos') {
-    this.listaSeleccionable[0] =  new Punto('Totales');
+      this.listaSeleccionable[0] =  new Punto('Totales');
 
-    this.PuntosDelJuego();
-    this.NivelesDelJuego();
+      this.PuntosDelJuego();
+      this.NivelesDelJuego();
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
-      this.AlumnosDelJuego();
-    } else {
-      this.EquiposDelJuego();
-    }
+      //Se discrimina por modo de Juego: Individual o Colectivo
+      if (this.juegoSeleccionado.Modo === 'Individual') {
+        this.AlumnosDelJuego();
+      } else {
+        this.EquiposDelJuego();
+      }
     }
 
     if (this.juegoSeleccionado.Tipo === 'Juego De Colección') {
-      if (this.juegoSeleccionado.Modo === 'Individual') {
-        this.AlumnosDelJuegoColeccion();
-      } else {
-        this.EquiposDelJuegoColeccion();
-      }
-      }
 
-
-
+        //Se discrimina por modo de Juego: Individual o Colectivo
+        if (this.juegoSeleccionado.Modo === 'Individual') {
+          this.AlumnosDelJuegoColeccion();
+        } else {
+          this.EquiposDelJuegoColeccion();
+        }
+    }
   }
 
-  // Recupera los alumnos que pertenecen al juego
+  // Recupera los alumnos que pertenecen al juego de Colecciones desde la API
   AlumnosDelJuegoColeccion() {
     this.http.get<Alumno[]>(this.APIRURLJuegoDeColeccion + '/' + this.juegoSeleccionado.id + '/alumnos')
     .subscribe(alumnosJuego => {
@@ -119,7 +110,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-  // Recupera los equipos que pertenecen al juego
+  // Recupera los equipos que pertenecen al juego de Colecciones desde la API
   EquiposDelJuegoColeccion() {
     this.http.get<Equipo[]>(this.APIRURLJuegoDeColeccion + '/' + this.juegoSeleccionado.id + '/equipos')
     .subscribe(equiposJuego => {
@@ -131,6 +122,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
+  // Recupera la colección de cromos que pertenece al juego de Colecciones desde la API
   ColeccionDelJuego() {
     this.http.get<Coleccion>(this.APIRURLColecciones + '/' + this.juegoSeleccionado.coleccionId)
     .subscribe(coleccion => {
@@ -139,8 +131,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-
-   // Recupera los puntos que se pueden asignar en el juego
+   // Recupera los puntos que se pueden asignar en el juego de Puntos
    PuntosDelJuego() {
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/puntos')
     .subscribe(puntos => {
@@ -153,7 +144,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-  // Recupera los niveles de los que dispone el juego
+  // Recupera los niveles de los que dispone el juego de Puntos
   NivelesDelJuego() {
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/nivels')
     .subscribe(niveles => {
@@ -162,7 +153,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-  // Recupera los alumnos que pertenecen al juego
+  // Recupera los alumnos que pertenecen al juego de Puntos
   AlumnosDelJuego() {
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/alumnos')
     .subscribe(alumnosJuego => {
@@ -173,7 +164,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-  // Recupera los equipos que pertenecen al juego
+  // Recupera los equipos que pertenecen al juego de Puntos
   EquiposDelJuego() {
     this.http.get<any[]>(this.APIRURLJuegoDePuntos + '/' + this.juegoSeleccionado.id + '/equipos')
     .subscribe(equiposJuego => {
@@ -205,7 +196,7 @@ export class JuegoSeleccionadoPage  {
     });
   }
 
-  // Recoge la lista y la ordena por puntos de mayor a menor
+  // Recoge la lista de alumnos y la ordena por puntos de mayor a menor
   OrdenarPorPuntos() {
 
     // tslint:disable-next-line:only-arrow-functions
@@ -215,6 +206,7 @@ export class JuegoSeleccionadoPage  {
     return this.listaAlumnosOrdenadaPorPuntos;
   }
 
+  // Recoge la lista de equipos y la ordena por puntos de mayor a menor
   OrdenarPorPuntosEquipos() {
 
     // tslint:disable-next-line:only-arrow-functions
@@ -224,14 +216,19 @@ export class JuegoSeleccionadoPage  {
     return this.listaEquiposOrdenadaPorPuntos;
   }
 
+  //Función que permite buscar el alumno y su información a partir de el id que tiene asignado
+  //ese alumno en el juego.
+  //***(NO TIENE PORQUE COINCIDIR EL ID DEL ALUMNO CON EL ID DEL ALUMNO EN EL JUEGO)***
   BuscarAlumno(alumnoId: number): any {
 
     let alumno: any;
-    // tslint:disable-next-line:no-unused-expression
     alumno = this.items.filter(res => res.id === alumnoId)[0];
     return alumno;
   }
 
+   //Función que permite buscar el equipo y su información a partir de el id que tiene asignado
+  //ese equipo en el juego.
+  //***(NO TIENE PORQUE COINCIDIR EL ID DEL EQUIPO CON EL ID DEL EQUIPO EN EL JUEGO)***
   BuscarEquipo(equipoId: number): any {
 
     let equipo: any;
@@ -240,6 +237,7 @@ export class JuegoSeleccionadoPage  {
     return equipo;
   }
 
+  //Mediante el identificador del nivel introducido como parámetro, se obtiene el nivel entero
   BuscarNivel(nivelId: number): any {
 
     let nivel: any;
@@ -250,12 +248,11 @@ export class JuegoSeleccionadoPage  {
     return nivel;
   }
 
-   // En función del modo, recorremos la lisa de Alumnos o de Equipos y vamos rellenando el rankingJuegoDePuntos
+   // En función del modo, recorremos la lista de Alumnos o de Equipos y vamos rellenando el rankingJuegoDePuntos
    TablaClasificacionTotal() {
 
     if (this.juegoSeleccionado.Modo === 'Individual') {
 
-      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.listaAlumnosOrdenadaPorPuntos.length; i++) {
         let alumno: any;
         let nivel: any;
@@ -315,21 +312,7 @@ export class JuegoSeleccionadoPage  {
     }
   }
 
-  AlumnosDelEquipo(equipo: any) {
-    console.log(equipo);
-
-    this.http.get<any[]>(this.APIUrl + '/' + equipo.id + '/alumnos')
-    .subscribe(res => {
-      if (res[0] !== undefined) {
-        this.alumnosEquipo = res;
-        console.log(res);
-      } else {
-        console.log('No hay alumnos en este equipo');
-        this.alumnosEquipo = undefined;
-      }
-    });
-  }
-
+  //Ordena la tabla por puntos de mayor a menor. Se realiza distinción entre modo Individual o colectivo
   OrdenarTablaPorPuntos() {
     if (this.juegoSeleccionado.Modo === 'Individual') {
       console.log('Voy a orddenar la tabla');
@@ -356,6 +339,7 @@ export class JuegoSeleccionadoPage  {
 
   }
 
+  //Calcula las posiciones de los alumnos segun el tipo de punto seleccionado
   ClasificacionPorTipoDePunto() {
     if (this.juegoSeleccionado.Modo === 'Individual') {
 
@@ -440,6 +424,8 @@ export class JuegoSeleccionadoPage  {
 
   }
 
+  //Función que permite mostrar los puntos totales o en caso de seleccionar un punto, te muestra
+  //la tabla segun el tipo de punto seleccionado
   MostrarRankingSeleccionado() {
 
     // Si es indefinido muestro la tabla del total de puntos
@@ -455,6 +441,7 @@ export class JuegoSeleccionadoPage  {
     }
   }
 
+  //Función que permite redirigirte a la página de información de juego de puntos o juego de coleccion
   irInformacion(juego: any) {
     if (this.juegoSeleccionado.Tipo === 'Juego De Puntos') {
     console.log ('Accediendo a Información de Juego de Puntos');
@@ -467,11 +454,13 @@ export class JuegoSeleccionadoPage  {
     }
 }
 
+//Función que permite redirigirte a la página de asignación de puntos
 AsignarPuntos(juego: any) {
   console.log ('Accediendo a Asignación de Puntos');
   this.navCtrl.push (AsignarPuntosPage,{juego:juego});
 }
 
+//Función que permite redirigirte a la página de asignación de cromos
 AsignarCromos(juego: any) {
   console.log ('Accediendo a Asignación de Puntos');
   this.navCtrl.push (AsignarCromosPage,{juego:juego});
@@ -514,11 +503,13 @@ fijarItems(items :any[]){
       }
     }
 
+    //Función que permite redirigirte a la página de cromos disponibles de un alumno
     irCromosActualesAlumno(alumno:any,juego: any){
       console.log ('Accediendo a Asignación de Puntos');
       this.navCtrl.push (MisCromosActualesPage,{alumno:alumno,coleccion:this.coleccion,juego:juego });
     }
 
+    //Función que permite redirigirte a la página de cromos disponibles de un equipo
     irCromosActualesEquipo(equipo:any,juego: any){
       console.log ('Accediendo a Asignación de Puntos');
       this.navCtrl.push (MisCromosActualesPage,{equipo:equipo,coleccion:this.coleccion, juego:juego });

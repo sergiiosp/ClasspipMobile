@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+//Importamos las páginas necesarias
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the SlidePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -19,10 +15,12 @@ export class SlidePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  //Se realizarán las siguiente tareas al inicializar la página.
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SlidePage');
+    console.log('Bienvenido a la introducción de Classpip Mobile');
   }
 
+  //Se definen las páginas deslizables
   slides = [
     {
       title: "Descubre Classpip Mobile!",
@@ -41,6 +39,7 @@ export class SlidePage {
     }
   ];
 
+  //Función que te redirije a la página de registro para inicializar Classpip
   irRegistro() {
     console.log ('Accediendo a pagina Registro');
     this.navCtrl.setRoot (HomePage);

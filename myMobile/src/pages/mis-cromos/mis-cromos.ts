@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, ResponseContentType} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
 
-
+//Importamos las CLASES necesarias
 import {Cromo} from '../../clases/Cromo';
 import {Coleccion} from '../../clases/Coleccion';
 
@@ -15,17 +15,18 @@ import {Coleccion} from '../../clases/Coleccion';
 })
 export class MisCromosPage {
 
+  // PARAMETROS QUE RECOGEMOS DE LA PAGINA PREVIA
   coleccion:Coleccion;
 
+  //PARAMETROS DE UNA COLECCION DE CROMOS
   imagenColeccion: string;
-  imagenesColeccion: any[] = [];
-  coleccionesProfesor: Coleccion[];
   cromosColeccion: Cromo[];
-  numeroDeCromos: number;
 
+  //PARAMETROS DE UN CROMO
   cromo: Cromo;
   imagenCromoArray: string[] = [];
 
+  // URLs que utilizaremos
   private APIUrl = 'http://localhost:3000/api/Colecciones';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -33,9 +34,9 @@ export class MisCromosPage {
     this.coleccion=navParams.get('coleccion');
   }
 
+  //Se realizarán las siguiente tareas al inicializar la pantalla.
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MisCromosPage');
-    console.log(this.coleccion);
+    console.log('Bienvenido a la página de cromos de la coleccion');
     this.CromosEImagenDeLaColeccion(this.coleccion);
     this.GET_Imagen();
   }
@@ -87,7 +88,6 @@ export class MisCromosPage {
       }
     });
   }
-
 
    // Busca la imagen que tiene el nombre del cromo.Imagen y lo carga en imagenCromo
    GET_ImagenCromo() {
